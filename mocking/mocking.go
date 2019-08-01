@@ -8,21 +8,15 @@ import (
 )
 
 func main() {
-  sleeper := &DefaultSleeper{}
+  sleeper := &ConfigurableSleeper{1 * time.Second, time.Sleep}
   Countdown(os.Stdout, sleeper)
 }
 
 const finalWord = "Go!"
 const countdownStart = 3
 
-type DefaultSleeper struct {}
-
 type Sleeper interface {
   Sleep()
-}
-
-func (d *DefaultSleeper) Sleep() {
-  time.Sleep(1 * time.Second)
 }
 
 func Countdown(out io.Writer, sleeper Sleeper) {
